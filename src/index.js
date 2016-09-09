@@ -103,7 +103,7 @@ var Accordion = React.createClass({
           underlayColor={this.props.underlayColor}
           style={this.props.style}
         >
-          {this.props.header}
+          {!!this.props.renderHeader ? this.props.renderHeader(this.props.expanded) : this.props.header}
         </TouchableHighlight>
         <View
           ref="AccordionContentWrapper"
