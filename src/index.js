@@ -19,7 +19,8 @@ var Accordion = React.createClass({
     content: React.PropTypes.element.isRequired,
     easing: React.PropTypes.string,
     expanded: React.PropTypes.bool,
-    header: React.PropTypes.element.isRequired,
+    header: React.PropTypes.element,
+    renderHeader:React.PropTypes.func,
     onPress: React.PropTypes.func,
     underlayColor: React.PropTypes.string,
     style: React.PropTypes.object
@@ -90,6 +91,9 @@ var Accordion = React.createClass({
   },
 
   render() {
+    var header = this.props.renderHeader
+      ? this.props.renderHeader.call(null, this.state.is_visible)
+      : this.props.header
     return (
       /*jshint ignore:start */
       <View
@@ -103,7 +107,7 @@ var Accordion = React.createClass({
           underlayColor={this.props.underlayColor}
           style={this.props.style}
         >
-          {!!this.props.renderHeader ? this.props.renderHeader(this.props.expanded) : this.props.header}
+          {header}
         </TouchableHighlight>
         <View
           ref="AccordionContentWrapper"
